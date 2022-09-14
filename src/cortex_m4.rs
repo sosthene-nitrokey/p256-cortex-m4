@@ -132,11 +132,8 @@ impl SecretKey {
     //     Some(Self(bytes.as_ref().try_into().ok()?))
     // }
 
-    #[allow(unused_unsafe)]
     /// Convert endianness to obtain the big-endian representation of the secret scalar as 32 bytes.
-    ///
-    /// "unsafe" because the caller is responsible for keeping the value secret.
-    pub unsafe fn to_bytes(&self) -> [u8; 32] {
+    pub fn to_bytes(&self) -> [u8; 32] {
         let mut big_endian = [0u8; 32];
         unsafe {
             p256_cortex_m4_sys::p256_convert_endianness(
